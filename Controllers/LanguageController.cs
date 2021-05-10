@@ -19,17 +19,36 @@ namespace cosmos_db_repository_api.Controllers
         {
             _repository = factory.RepositoryOf<Language>();
         }
-        
-        [HttpGet(Name = nameof(GetLanguages))]
-        public ValueTask<IEnumerable<Language>> GetLanguages() => 
-            _repository.GetByQueryAsync("select * from c");
 
-        
-        [HttpPost(Name = nameof(PostLanguages))]
-        public ValueTask<IEnumerable<Language>> PostLanguages([FromBody] params Language[] languages) =>
-            _repository.CreateAsync(languages);
+        [HttpGet]
+        [Route("")]
+        public async Task<ActionResult> Get()
+        {
+            IEnumerable<Language> languages = await _repository.GetByQueryAsync("select * from c");
+
+            return Ok(languages);
+        }
 
 
+
+        [HttpPost]
+        [Route("")]
+        public async Task<ActionResult> Post([FromBody] Language model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                await _repository.CreateAsync(model);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest(new { message = "Não conseguiu criar a linguagem" });
+            }
+
+            return Ok(model);
+        }
     }
 
 }

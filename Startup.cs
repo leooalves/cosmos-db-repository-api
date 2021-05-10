@@ -28,7 +28,7 @@ namespace cosmos_db_repository_api
             services.AddSwaggerGen(options =>
                options.SwaggerDoc("v1", new OpenApiInfo
                {
-                   Title = "Language - Web API",
+                   Title = "Cosmos DB- Repository API",
                    Version = "v1"
                }));
         }
@@ -43,7 +43,7 @@ namespace cosmos_db_repository_api
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Language - Web API"));
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Cosmos DB - Repository API"));
 
             app.UseHttpsRedirection();
 
