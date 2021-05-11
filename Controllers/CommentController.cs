@@ -31,8 +31,8 @@ namespace cosmos_db_repository_api.Controllers
 
     
         [HttpGet]
-        [Route("GetLinq/{postId}")]
-        public async Task<ActionResult> GetCommentsFromPostLinq(string postId)
+        [Route("post/WithPredicate/{postId}")]
+        public async Task<ActionResult> GetCommentsFromPostPredicate(string postId)
         {
             IEnumerable<Comment> comments = await _repository.GetAsync(x => x.postId == postId && x.Type == "Comment");
 
