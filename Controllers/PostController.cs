@@ -41,7 +41,7 @@ namespace cosmos_db_repository_api.Controllers
 
 
         [HttpGet]
-        [Route("Predicate")]
+        [Route("WithPredicate")]
         public async Task<ActionResult> GetWithPredicate()
         {
             IEnumerable<Post> posts = await _repository.GetAsync(x => x.DataCriacao > new DateTime(2020,01,01) );
